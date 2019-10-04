@@ -5,6 +5,8 @@
     xmlns:local="using:News"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Windows.UI.Xaml.Controls"
+    xmlns:Windows10version1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -12,21 +14,60 @@
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="Auto"/>
+            
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        
-        
-        <RelativePanel x:Name="HeaderPanel" 
+
+        <NavigationView x:Name="nvTopLevelNav"
+                        IsBackButtonVisible="Collapsed"
+                        Windows10version1809:PaneDisplayMode="LeftCompact"
+                        Loaded="nvTopLevelNav_Loaded"
+                        SelectionChanged="nvTopLevelNav_SelectionChanged"
+                        ItemInvoked="nvTopLevelNav_ItemInvoked">
+            <NavigationView.MenuItems>
+                <NavigationViewItem 
+                    Icon="Home" 
+                    Content="Сегодня"
+                    Tag="Page1"
+                    IsSelected="True"
+                    />
+                <NavigationViewItem 
+                    Icon="OutlineStar"
+                    Content="Мои интересы"
+                    Tag="Page2"/>
+                <NavigationViewItem
+                    Content="Источники"
+                    Tag="Page3">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8E4;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+            </NavigationView.MenuItems>
+            <Frame x:Name="contentFrame"></Frame>
+        </NavigationView>
+
+
+
+            <!--<RelativePanel x:Name="HeaderPanel" 
                        Background="Red" 
                        Height="50" 
                        Grid.Row="0">
-            
-            
+
+
         </RelativePanel>
-        
+
+        <CommandBar>
+            <AppBarToggleButton x:Name="NightTheme"
+                                Label="Night"
+                                Click="NightTheme_Click"
+                                Icon="Add">
+
+            </AppBarToggleButton>
+        </CommandBar>-->
+
+
     </Grid>
 </Page>

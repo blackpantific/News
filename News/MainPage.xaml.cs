@@ -36,5 +36,55 @@ namespace News
             titleBar.BackgroundColor = Windows.UI.ColorHelper.FromArgb(1, 67, 234, 165);
             titleBar.ButtonBackgroundColor = ColorHelper.FromArgb(1, 67, 234, 165);
         }
+
+        private void nvTopLevelNav_Loaded(object sender, RoutedEventArgs e)
+        {
+            foreach (NavigationViewItemBase item in nvTopLevelNav.MenuItems)
+            {
+                if (item is NavigationViewItem && item.Tag.ToString() == "Page1")
+                {
+                    nvTopLevelNav.SelectedItem = item;
+                    break;
+                }
+            }
+            contentFrame.Navigate(typeof(TodayPage));
+        }
+
+        private void nvTopLevelNav_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        {
+        }
+
+        private void nvTopLevelNav_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        {
+
+            if (args.IsSettingsInvoked)
+            {
+                contentFrame.Navigate(typeof(MySettings));
+            }
+            else
+            {
+                TextBlock ItemContent = args.InvokedItem as TextBlock;
+                if (ItemContent != null)
+                {
+                    switch (ItemContent.Tag)
+                    {
+                        case "Page1":
+                            contentFrame.Navigate(typeof(TodayPage));
+                            break;
+
+                        case "Page2":
+                            contentFrame.Navigate(typeof(MyInterests));
+                            break;
+
+                        case "Page3":
+                            contentFrame.Navigate(typeof(MySources));
+                            break;
+                    }
+                }
+            }
+        }
+
+
+
     }
 }
