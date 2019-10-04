@@ -59,14 +59,14 @@ namespace News
 
             if (args.IsSettingsInvoked)
             {
-                contentFrame.Navigate(typeof(MySettings));
+                contentFrame.Navigate(typeof(SettingsPage));
             }
             else
             {
-                TextBlock ItemContent = args.InvokedItem as TextBlock;
-                if (ItemContent != null)
+                var itemContent = args.InvokedItemContainer;
+                if (itemContent != null)
                 {
-                    switch (ItemContent.Tag)
+                    switch (itemContent.Tag)
                     {
                         case "Page1":
                             contentFrame.Navigate(typeof(TodayPage));

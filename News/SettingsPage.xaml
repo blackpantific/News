@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="News.MySettings"
+    x:Class="News.SettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:News"
@@ -9,6 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-
+        <TextBlock Text="Greets!"
+                   Foreground="Azure" />
     </Grid>
 </Page>

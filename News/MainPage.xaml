@@ -23,7 +23,7 @@
 
         <NavigationView x:Name="nvTopLevelNav"
                         IsBackButtonVisible="Collapsed"
-                        Windows10version1809:PaneDisplayMode="LeftCompact"
+                        PaneDisplayMode="LeftCompact"
                         Loaded="nvTopLevelNav_Loaded"
                         SelectionChanged="nvTopLevelNav_SelectionChanged"
                         ItemInvoked="nvTopLevelNav_ItemInvoked">
