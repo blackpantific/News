@@ -35,6 +35,8 @@ namespace News
             ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
             titleBar.BackgroundColor = Windows.UI.ColorHelper.FromArgb(1, 67, 234, 165);
             titleBar.ButtonBackgroundColor = ColorHelper.FromArgb(1, 67, 234, 165);
+
+
         }
 
         private void nvTopLevelNav_Loaded(object sender, RoutedEventArgs e)
@@ -73,11 +75,11 @@ namespace News
                             break;
 
                         case "Page2":
-                            contentFrame.Navigate(typeof(MyInterests));
+                            contentFrame.Navigate(typeof(InterestsPage));
                             break;
 
                         case "Page3":
-                            contentFrame.Navigate(typeof(MySources));
+                            contentFrame.Navigate(typeof(SourcesPage));
                             break;
                     }
                 }

@@ -10,17 +10,123 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
+            <RowDefinition Height="42"/>
             <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition  Width="Auto"/>
+            <ColumnDefinition  Width="*"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Rectangle Grid.Column="0" Grid.Row="0" Fill="LightGreen"/>
-        <Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Fill="LightBlue"  />
-        <Rectangle Grid.Column="2" Grid.Row="2" Fill="LightPink" />
+
+        <TextBlock Text="Сегодня"  
+                   SelectionHighlightColor="Green" 
+                   Foreground="DarkSlateGray" 
+                   FontWeight="Bold" 
+                   Padding="20 10 0 0"
+                   FontSize="18"
+                   FontFamily="Arial" 
+                   Grid.Column="0"
+                   />
+
+        <AutoSuggestBox
+                   Margin="5"
+                   PlaceholderText="Поиск среди интересов и в интернете"
+                   QueryIcon="Find"
+                   Width="500"
+                   
+                   AutomationProperties.Name="Basic AutoSuggestBox"
+                   Grid.Column="1">
+        </AutoSuggestBox>
+
+        <CommandBar Grid.Column="2" 
+                    Height="90"
+                    Background="White">
+           
+            <AppBarButton Icon="Edit" 
+                          Label="Редактировать"/>
+            <AppBarButton Label="Включить темную тему">
+                <AppBarButton.Icon>
+                    <FontIcon FontFamily="Segoe MDL2 Assets" 
+                              Glyph="&#xE708;"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+           
+        </CommandBar>
+
+        <Pivot x:Name="nvTopLevelNav"
+                     
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        IsHeaderItemsCarouselEnabled="True"
+                       >
+
+            <PivotItem Header="Мои новости">
+                <Frame x:Name="GenerateNewsPage" />
+            </PivotItem>
+            <PivotItem Header="Section 2">
+               
+            </PivotItem>
+            <PivotItem Header="Section 3">
+                
+            </PivotItem>
+            <PivotItem Header="Section 4">
+                
+            </PivotItem>
+            <PivotItem Header="Section 1">
+
+            </PivotItem>
+            <PivotItem Header="Section 2">
+
+            </PivotItem>
+            <PivotItem Header="Section 3">
+
+            </PivotItem>
+            <PivotItem Header="Section 4">
+
+            </PivotItem>
+            <PivotItem Header="Section 1">
+
+            </PivotItem>
+            <PivotItem Header="Section 2">
+
+            </PivotItem>
+            <PivotItem Header="Section 3">
+
+            </PivotItem>
+            <PivotItem Header="Section 4">
+
+            </PivotItem>
+            <PivotItem Header="Section 1">
+
+            </PivotItem>
+            <PivotItem Header="Section 2">
+
+            </PivotItem>
+            <PivotItem Header="Section 3">
+
+            </PivotItem>
+            <PivotItem Header="Section 4">
+
+            </PivotItem>
+            <PivotItem Header="Section 1">
+
+            </PivotItem>
+            <PivotItem Header="Section 2">
+
+            </PivotItem>
+            <PivotItem Header="Section 3">
+
+            </PivotItem>
+            <PivotItem Header="Section 4">
+
+            </PivotItem>
+
+        </Pivot>
+
+
+
     </Grid>
 </Page>

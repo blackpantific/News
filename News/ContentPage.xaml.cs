@@ -20,16 +20,11 @@ namespace News
     /// <summary>
     /// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
     /// </summary>
-    public sealed partial class TodayPage : Page
+    public sealed partial class ContentPage : Page
     {
-        public TodayPage()
+        public ContentPage()
         {
             this.InitializeComponent();
-
-
-            //ВЫНЕСТИ В ОТДЕЛЬНЫЙ КЛАСС ДОБАВЛЕНИЯ ЭЛЕМЕНТОВ В PIVOT 
-            GenerateNewsPage.Navigate(typeof(NewsCollectionPage));
-          
         }
     }
 }
