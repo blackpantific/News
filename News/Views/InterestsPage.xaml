@@ -80,8 +80,9 @@
                  Margin="10 0 0 0"
                  ItemsSource="{x:Bind interestsName}"
                  SelectedIndex="0"
-                 SelectionChanged="InterestsList_SelectionChanged"
-                 >
+                 SelectionChanged="InterestsList_SelectionChanged">
+            
+                 
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding}"/>
@@ -97,7 +98,7 @@
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top"
                   Margin="28 16 0 0"
-                  ItemsSource="{x:Bind someList, Mode=TwoWay}"
+                  ItemsSource="{x:Bind listOfCurrentNewsTopics, Mode=TwoWay}"
                   ItemTemplate="{StaticResource TopicGridView_ItemTemplate}">
         </GridView>
         

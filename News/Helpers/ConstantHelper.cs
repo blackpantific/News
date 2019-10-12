@@ -1,6 +1,7 @@
 ﻿using News.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace News.Helpers
         //создание тем для каждого подраздела новостей, страница InterestsPage
         
         //ВНЕСТИ ВСЕ ОБЪЯВЛЕНИЕ В ЦИКЛ И В НЕМ ЗАДАВАТЬ TRUE СВОЙСТВУ IsChecked из списка данных приложения, 
-        public static readonly List<NewsTopics> news = new List<NewsTopics>()
+        public static readonly ObservableCollection<NewsTopics> news = new ObservableCollection<NewsTopics>()
         {
             new NewsTopics() { Label = "Главные новости", PicturePath="/TopicNewsImages/breakingnews.jpg", TopicId=0},
             new NewsTopics() { Label = "В мире", PicturePath="/TopicNewsImages/worldnews.jpg", TopicId=1},
@@ -32,14 +33,14 @@ namespace News.Helpers
             new NewsTopics() { Label = "Происшествия", PicturePath="/TopicNewsImages/incident.jpg", TopicId=3}
         };
 
-        public static readonly List<NewsTopics> sport = new List<NewsTopics>()
+        public static readonly ObservableCollection<NewsTopics> sport = new ObservableCollection<NewsTopics>()
         {
             new NewsTopics() { Label = "Футбол", PicturePath="/TopicNewsImages/football.jpg", TopicId=4},
             new NewsTopics() { Label = "Баскетбол", PicturePath="/TopicNewsImages/basketball.jpg", TopicId=5},
             new NewsTopics() { Label = "Хоккей", PicturePath="/TopicNewsImages/hockey.jpg", TopicId=6}
         };
 
-        public static readonly List<NewsTopics> entertainment = new List<NewsTopics>()
+        public static readonly ObservableCollection<NewsTopics> entertainment = new ObservableCollection<NewsTopics>()
         {
             new NewsTopics() { Label = "Знаменитости", PicturePath="/TopicNewsImages/celebrities.jpg", TopicId=7},
             new NewsTopics() { Label = "Кино и ТВ", PicturePath="/TopicNewsImages/cinema.jpg", TopicId=8},
@@ -47,14 +48,14 @@ namespace News.Helpers
         };
 
 
-        public static readonly List<NewsTopics> business = new List<NewsTopics>()
+        public static readonly ObservableCollection<NewsTopics> business = new ObservableCollection<NewsTopics>()
         {
             new NewsTopics() { Label = "Новости рынков", PicturePath="/TopicNewsImages/marketnews.jpg", TopicId=10},
             new NewsTopics() { Label = "Личные финансы", PicturePath="/TopicNewsImages/finance.jpg", TopicId=11},
             new NewsTopics() { Label = "Недвижимость", PicturePath="/TopicNewsImages/realstate.jpg", TopicId=12}
         };
 
-        public static readonly List<NewsTopics> technologies = new List<NewsTopics>()
+        public static readonly ObservableCollection<NewsTopics> technologies = new ObservableCollection<NewsTopics>()
         {
             new NewsTopics() { Label = "Наука и техника", PicturePath="/TopicNewsImages/science.jpg", TopicId=13},
             new NewsTopics() { Label = "Хайтек", PicturePath="/TopicNewsImages/hi-tech.jpg", TopicId=14},
