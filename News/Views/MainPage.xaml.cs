@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Networking.Connectivity;
 
 // Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x419
 
@@ -28,6 +29,7 @@ namespace News
         {
             this.InitializeComponent();
 
+            //Design for TitleBar
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.CompactOverlay;
 
             ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(800, 800));
@@ -36,7 +38,9 @@ namespace News
             titleBar.BackgroundColor = Windows.UI.ColorHelper.FromArgb(1, 67, 234, 165);
             titleBar.ButtonBackgroundColor = ColorHelper.FromArgb(1, 67, 234, 165);
 
-
+            //Is App connected to network
+            //var profile = NetworkInformation.GetInternetConnectionProfile();
+            //bool isConnected = profile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.None;
         }
 
         private void nvTopLevelNav_Loaded(object sender, RoutedEventArgs e)

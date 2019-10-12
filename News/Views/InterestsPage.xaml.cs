@@ -1,4 +1,5 @@
-﻿using System;
+﻿using News.Helpers;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +23,17 @@ namespace News
     /// </summary>
     public sealed partial class InterestsPage : Page
     {
+        List<string> interestsName { get; set; }
         public InterestsPage()
         {
             this.InitializeComponent();
+
+            interestsName = ConstantHelper.interestsName;
+        }
+
+        private void InterestsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
         }
     }
 }

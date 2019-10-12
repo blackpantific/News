@@ -8,6 +8,14 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+
+       
+        
+        
+    </Page.Resources>
+    
+    
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -23,7 +31,7 @@
                     Grid.Row="0"
                     Grid.Column="0" 
                     Grid.ColumnSpan="2">
-            <TextBlock Text="Источники"
+            <TextBlock Text="Новостные источники"
                         Foreground="DarkSlateGray" 
                         FontWeight="Bold" 
                         Padding="20 10 0 0"
@@ -49,16 +57,22 @@
         </StackPanel>
 
 
-        <ListBox Name="InterestsList" 
+        <ListBox x:Name="SourcesList" 
                  Grid.Row="1"
                  Grid.Column="0"
                  Background="White"
-                 Margin="10 0 0 0">
-            <ListBoxItem Content="Мои интересы" />
-            <ListBoxItem Content="Мир"/>
-            <ListBoxItem Content="Музыка"/>
-            <ListBoxItem Content="Авто"/>
-            <ListBoxItem Content="Бизнес"/>
+                 Margin="10 0 0 0"
+                 ItemsSource="{x:Bind newsName}"
+                 SelectedIndex="0"
+                 SelectionChanged="SourcesList_SelectionChanged"
+                 >
+            
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+                       
         </ListBox>
 
     </Grid>

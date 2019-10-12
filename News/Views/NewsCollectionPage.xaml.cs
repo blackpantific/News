@@ -59,7 +59,7 @@ namespace News
                     unsupportedFilesFound = true;
                 }
             }
-            ImageGridView.ItemsSource = Images;
+            
 
             if (unsupportedFilesFound == true)
             {

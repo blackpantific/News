@@ -5,17 +5,42 @@
     xmlns:local="using:News"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:News.Models"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+
+        <DataTemplate x:Key="TopicGridView_ItemTemplate"
+                      x:DataType="models:NewsTopics">
+            <Grid Width="192" 
+                  Height="228">
+                <Image Source="{x:Bind PicturePath}"/>
+                <TextBlock Text="{x:Bind Label}"
+                           Margin="0 10 0 0"
+                           FontFamily="Arial"
+                           FontWeight="Normal"
+                           FontSize="19"
+                           Width="135"
+                           TextWrapping="WrapWholeWords"
+                           Foreground="White"/>
+                <CheckBox IsChecked="{x:Bind IsChecked}"
+                          VerticalAlignment="Bottom"
+                          Margin="5 0 0 0"/>
+            </Grid>
+        </DataTemplate>
+
+    </Page.Resources>
+    
 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="165"/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Vertical" 
@@ -48,17 +73,34 @@
         </StackPanel>
 
 
-        <ListBox Name="InterestsList" 
+        <ListBox x:Name="InterestsList" 
                  Grid.Row="1"
                  Grid.Column="0"
                  Background="White"
-                 Margin="10 0 0 0">
-            <ListBoxItem Content="Мои интересы" />
-            <ListBoxItem Content="Новости"/>
-            <ListBoxItem Content="Спорт"/>
-            <ListBoxItem Content="Развлечения"/>
-            <ListBoxItem Content="Повседневная жизнь"/>
+                 Margin="10 0 0 0"
+                 ItemsSource="{x:Bind interestsName}"
+                 SelectedIndex="0"
+                 SelectionChanged="InterestsList_SelectionChanged"
+                 >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
+
+        <GridView x:Name="NewsSourcesGridView"
+                  Width="800"
+                  Height="800"
+                  Grid.Column="1"
+                  Grid.Row="1"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  Margin="28 16 0 0"
+                  ItemsSource="{x:Bind someList, Mode=TwoWay}"
+                  ItemTemplate="{StaticResource TopicGridView_ItemTemplate}">
+        </GridView>
+        
 
     </Grid>
 </Page>
