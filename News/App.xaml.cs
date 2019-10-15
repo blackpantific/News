@@ -1,13 +1,19 @@
-﻿using System;
+﻿using News.Helpers;
+using News.Models;
+using News.Services;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -29,16 +35,18 @@ namespace News
         /// Инициализирует одноэлементный объект приложения. Это первая выполняемая строка разрабатываемого
         /// кода, поэтому она является логическим эквивалентом main() или WinMain().
         /// </summary>
+        /// 
+
+        public Windows.Storage.StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+
         public App()
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 
             //полноэкранный режим
-            
 
-            //SolidColorBrush solidColorBrush = new SolidColorBrush();
-            //solidColorBrush.Color
+           
 
         }
 
@@ -81,6 +89,9 @@ namespace News
                 // Обеспечение активности текущего окна
                 Window.Current.Activate();
             }
+
+
+            ReadUserCheckedListElements();//
         }
 
         /// <summary>
@@ -102,9 +113,41 @@ namespace News
         /// <param name="e">Сведения о запросе приостановки.</param>
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
+            WriteUserCheckedListElements();//json user data to file
+
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Сохранить состояние приложения и остановить все фоновые операции
             deferral.Complete();
         }
+
+
+        async void WriteUserCheckedListElements()
+        {
+            var json = JsonConvert.SerializeObject(InterestsService.SaveSelectedListBoxItems);
+
+            var storageUserCheckedListFile = await localFolder.CreateFileAsync("userDataCheckedList.txt", 
+                CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(storageUserCheckedListFile, json);
+        }
+
+        async void ReadUserCheckedListElements()
+        {
+            try
+            {
+                var storageUserCheckedListFile = await localFolder.GetFileAsync("userDataCheckedList.txt");
+                var json = await FileIO.ReadTextAsync(storageUserCheckedListFile);
+
+                ConstantHelper.DeserializedJsonFromTxtFile = JsonConvert.DeserializeObject<List<NewsTopics>>(json);
+            }
+            catch(FileNotFoundException e)
+            {
+
+            }
+            catch(IOException e)
+            {
+
+            }
+        }
+
     }
 }

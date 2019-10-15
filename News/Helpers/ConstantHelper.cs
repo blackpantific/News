@@ -12,18 +12,22 @@ namespace News.Helpers
     class ConstantHelper
     {
 
-        public static readonly List<string> newsName = new List<string>()
+        public static readonly List<string> NewsName = new List<string>()
             {"BBC News", "Daily Mail", "CNN", "Google News (Russia)",
             "Hacker News", "National Geographic", "The Washington Post",
             "The Wall Street Journal", "BBC Sport"};
 
-        public static readonly List<string> interestsName = new List<string>()
+        public static readonly List<string> InterestsName = new List<string>()
         { "Новости", "Спорт", "Развлечения", "Повседневная жизнь", "Семья и саморазвитие",
             "Бизнес и финансы", "Авто", "Технологии", "Фото и видео", "Страны ЕС" };
 
+        public static string PathString = "https://newsapi.org/v2/everything?{0}&apiKey=562af3f4f64141dfbe20f2d60844a6b0";
+
+        public static List<NewsTopics> DeserializedJsonFromTxtFile { get; set; } = new List<NewsTopics>();
+
 
         //создание тем для каждого подраздела новостей, страница InterestsPage
-        
+
         //ВНЕСТИ ВСЕ ОБЪЯВЛЕНИЕ В ЦИКЛ И В НЕМ ЗАДАВАТЬ TRUE СВОЙСТВУ IsChecked из списка данных приложения, 
         public static readonly ObservableCollection<NewsTopics> news = new ObservableCollection<NewsTopics>()
         {
@@ -62,5 +66,30 @@ namespace News.Helpers
             new NewsTopics() { Label = "Астрономия", PicturePath="/TopicNewsImages/astronomy.jpg", TopicId=15},
             new NewsTopics() { Label = "Планета Земля", PicturePath="/TopicNewsImages/planetearth.jpg", TopicId=16}
         };
+
+
+        public static void SetCheckedListsValues()
+        {
+            var lists = new List<ObservableCollection<NewsTopics>>()
+            {
+                ConstantHelper.news, ConstantHelper.sport,
+                ConstantHelper.entertainment, ConstantHelper.business,
+                ConstantHelper.technologies
+            };
+
+            var listOfLists = from list in lists
+                              from topicList in list
+                              select topicList;
+            foreach (var deserializedItem in ConstantHelper.DeserializedJsonFromTxtFile)
+            {
+                foreach (var item in listOfLists)
+                {
+                    if(deserializedItem.TopicId == item.TopicId)
+                    {
+                        item.IsChecked = true;
+                    }
+                }
+            }
+        }
     }
 }

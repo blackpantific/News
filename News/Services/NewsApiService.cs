@@ -1,4 +1,5 @@
 ﻿using News.Extensions;
+using News.Helpers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,12 +16,11 @@ namespace News
 
         public async void GetNewsByTopic(string newsTopic)
         {   
-            var path = $"https://newsapi.org/v2/everything?sources={newsTopic.GetTopicId()}&apiKey=562af3f4f64141dfbe20f2d60844a6b0";
 
             try
             {
-                HttpClient client = new HttpClient();
-                client.BaseAddress = new Uri(path);
+                var client = new HttpClient();
+                client.BaseAddress = new Uri(String.Format(ConstantHelper.PathString, $"source={newsTopic.GetTopicId()}"));
                 var response = await client.GetAsync(client.BaseAddress);
                 response.EnsureSuccessStatusCode();
 

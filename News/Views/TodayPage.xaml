@@ -5,6 +5,8 @@
     xmlns:local="using:News"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:News.Models"
+    xmlns:services ="using:News.Services"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -55,76 +57,38 @@
            
         </CommandBar>
 
-        <Pivot x:Name="nvTopLevelNav"
+        <!--<Pivot x:Name="nvTopLevelNav"
                      
                         Grid.Row="1"
                         Grid.Column="0"
                         Grid.ColumnSpan="3"
                         IsHeaderItemsCarouselEnabled="True"
-                       >
+                        ItemsSource="{x:Bind services:InterestsService.SaveSelectedListBoxItems}">
+            <Pivot.HeaderTemplate>
+                <DataTemplate x:DataType="models:NewsTopics">
+                    <TextBlock Text="{x:Bind Label}"/>
+                    
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
 
-            <PivotItem Header="Мои новости">
+            --><!--<PivotItem>
+                <PivotItem.Header>
+                    <ListView ItemsSource="{x:Bind services:InterestsService.SaveSelectedListBoxItems}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="models:NewsTopics">
+                                <TextBlock Text="{x:Bind Label}"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </PivotItem.Header>
+            </PivotItem>-->
+
+            <!--<PivotItem Header="Мои новости">
                 <Frame x:Name="GenerateNewsPage" />
-            </PivotItem>
-            <PivotItem Header="Section 2">
-               
-            </PivotItem>
-            <PivotItem Header="Section 3">
-                
-            </PivotItem>
-            <PivotItem Header="Section 4">
-                
-            </PivotItem>
-            <PivotItem Header="Section 1">
+            </PivotItem>--><!--
+           
 
-            </PivotItem>
-            <PivotItem Header="Section 2">
-
-            </PivotItem>
-            <PivotItem Header="Section 3">
-
-            </PivotItem>
-            <PivotItem Header="Section 4">
-
-            </PivotItem>
-            <PivotItem Header="Section 1">
-
-            </PivotItem>
-            <PivotItem Header="Section 2">
-
-            </PivotItem>
-            <PivotItem Header="Section 3">
-
-            </PivotItem>
-            <PivotItem Header="Section 4">
-
-            </PivotItem>
-            <PivotItem Header="Section 1">
-
-            </PivotItem>
-            <PivotItem Header="Section 2">
-
-            </PivotItem>
-            <PivotItem Header="Section 3">
-
-            </PivotItem>
-            <PivotItem Header="Section 4">
-
-            </PivotItem>
-            <PivotItem Header="Section 1">
-
-            </PivotItem>
-            <PivotItem Header="Section 2">
-
-            </PivotItem>
-            <PivotItem Header="Section 3">
-
-            </PivotItem>
-            <PivotItem Header="Section 4">
-
-            </PivotItem>
-
-        </Pivot>
+        </Pivot>-->
 
 
 

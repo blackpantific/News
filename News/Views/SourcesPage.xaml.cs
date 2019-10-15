@@ -18,7 +18,7 @@ namespace News
         {
             this.InitializeComponent();
 
-            newsName = ConstantHelper.newsName;
+            newsName = ConstantHelper.NewsName;
 
             newsApiService = new NewsApiService();
 

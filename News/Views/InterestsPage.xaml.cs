@@ -1,10 +1,13 @@
 ﻿using News.Helpers;
 using News.Models;
+using News.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -23,17 +26,35 @@ namespace News
     /// <summary>
     /// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
     /// </summary>
-    public sealed partial class InterestsPage : Page
+    public sealed partial class InterestsPage : Page, INotifyPropertyChanged
     {
+        
+
+        private ObservableCollection<NewsTopics> listOfCurrentNewsTopics;
+        public ObservableCollection<NewsTopics> ListOfCurrentNewsTopics
+        {
+            get { return listOfCurrentNewsTopics; }
+            set
+            {
+                if (listOfCurrentNewsTopics != value)
+                {
+                    listOfCurrentNewsTopics = value;
+                    OnPropertyChanged("ListOfCurrentNewsTopics");
+                }
+            }
+        }
         List<string> interestsName { get; set; }
-        List<int> saveIndexOfSelectedListBoxItems { get; set; }
-        ObservableCollection<NewsTopics> listOfCurrentNewsTopics { get; set; }
+       
+        
+
         
         public InterestsPage()
         {
             this.InitializeComponent();
 
-            interestsName = ConstantHelper.interestsName;
+            interestsName = ConstantHelper.InterestsName;
+            ConstantHelper.SetCheckedListsValues();
+          
         }
 
         private void InterestsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -44,26 +65,36 @@ namespace News
             switch (newsTopic)
             {
                 case "Новости":
-                    listOfCurrentNewsTopics = ConstantHelper.news;
+                    ListOfCurrentNewsTopics = ConstantHelper.news;
+                    //CheckingListForSelectedValues(ListOfCurrentNewsTopics, InterestsService.SaveSelectedListBoxItems);
                     break;
                 case "Спорт":
-                    listOfCurrentNewsTopics = ConstantHelper.sport;
+                    ListOfCurrentNewsTopics = ConstantHelper.sport;
                     break;
                 case "Развлечения":
-                    listOfCurrentNewsTopics = ConstantHelper.entertainment;
+                    ListOfCurrentNewsTopics = ConstantHelper.entertainment;
                     break;
                 case "Бизнес и финансы":
-                    listOfCurrentNewsTopics = ConstantHelper.business;
+                    ListOfCurrentNewsTopics = ConstantHelper.business;
                     break;
                 case "Технологии":
-                    listOfCurrentNewsTopics = ConstantHelper.technologies;
+                    ListOfCurrentNewsTopics = ConstantHelper.technologies;
                     break;
                 default:
-                    listOfCurrentNewsTopics.Clear();
+                    ListOfCurrentNewsTopics = null;
                     break;
 
 
             }
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName]string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+
+        
     }
 }

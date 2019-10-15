@@ -24,7 +24,7 @@
                            Width="135"
                            TextWrapping="WrapWholeWords"
                            Foreground="White"/>
-                <CheckBox IsChecked="{x:Bind IsChecked}"
+                <CheckBox IsChecked="{x:Bind IsChecked, Mode=TwoWay}"
                           VerticalAlignment="Bottom"
                           Margin="5 0 0 0"/>
             </Grid>
@@ -98,10 +98,14 @@
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top"
                   Margin="28 16 0 0"
-                  ItemsSource="{x:Bind listOfCurrentNewsTopics, Mode=TwoWay}"
+                  ItemsSource="{x:Bind ListOfCurrentNewsTopics, Mode=TwoWay}"
                   ItemTemplate="{StaticResource TopicGridView_ItemTemplate}">
+
         </GridView>
-        
+
+
+      
+
 
     </Grid>
 </Page>
