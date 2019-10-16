@@ -15,6 +15,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.UI;
+using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -57,6 +58,10 @@ namespace News
         /// <param name="e">Сведения о запросе и обработке запуска.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            ReadUserCheckedListElements();
+            
+
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Не повторяйте инициализацию приложения, если в окне уже имеется содержимое,
@@ -91,7 +96,6 @@ namespace News
             }
 
 
-            ReadUserCheckedListElements();//
         }
 
         /// <summary>
@@ -138,14 +142,22 @@ namespace News
                 var json = await FileIO.ReadTextAsync(storageUserCheckedListFile);
 
                 ConstantHelper.DeserializedJsonFromTxtFile = JsonConvert.DeserializeObject<List<NewsTopics>>(json);
+                ConstantHelper.SetCheckedListsValues();
             }
             catch(FileNotFoundException e)
             {
-
+                var messageDialog = new MessageDialog(e.Message);
+                await messageDialog.ShowAsync();
             }
             catch(IOException e)
             {
-
+                var messageDialog = new MessageDialog(e.Message);
+                await messageDialog.ShowAsync();
+            }
+            catch(Exception e)
+            {
+                var messageDialog = new MessageDialog(e.Message);
+                await messageDialog.ShowAsync();
             }
         }
 

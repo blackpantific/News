@@ -44,5 +44,10 @@ namespace News.Models
         {
             this.IsChecked = false;
         }
+
+        public override string ToString()
+        {
+            return this.Label;
+        }
     }
 }

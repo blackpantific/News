@@ -56,7 +56,7 @@ namespace News.Helpers
         {
             new NewsTopics() { Label = "Новости рынков", PicturePath="/TopicNewsImages/marketnews.jpg", TopicId=10},
             new NewsTopics() { Label = "Личные финансы", PicturePath="/TopicNewsImages/finance.jpg", TopicId=11},
-            new NewsTopics() { Label = "Недвижимость", PicturePath="/TopicNewsImages/realstate.jpg", TopicId=12}
+            new NewsTopics() { Label = "Недвижимость", PicturePath="/TopicNewsImages/realestate.jpg", TopicId=12}
         };
 
         public static readonly ObservableCollection<NewsTopics> technologies = new ObservableCollection<NewsTopics>()
@@ -80,13 +80,16 @@ namespace News.Helpers
             var listOfLists = from list in lists
                               from topicList in list
                               select topicList;
-            foreach (var deserializedItem in ConstantHelper.DeserializedJsonFromTxtFile)
+            if (ConstantHelper.DeserializedJsonFromTxtFile != null)        //ТУТ МОЖЕТ БЫТЬ ПРОБЛЕМА
             {
-                foreach (var item in listOfLists)
+                foreach (var deserializedItem in ConstantHelper.DeserializedJsonFromTxtFile)
                 {
-                    if(deserializedItem.TopicId == item.TopicId)
+                    foreach (var item in listOfLists)
                     {
-                        item.IsChecked = true;
+                        if (deserializedItem.TopicId == item.TopicId)
+                        {
+                            item.IsChecked = true;
+                        }
                     }
                 }
             }

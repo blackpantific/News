@@ -57,21 +57,23 @@
            
         </CommandBar>
 
-        <!--<Pivot x:Name="nvTopLevelNav"
+        <Pivot x:Name="nvTopLevelNav"
                      
                         Grid.Row="1"
                         Grid.Column="0"
                         Grid.ColumnSpan="3"
                         IsHeaderItemsCarouselEnabled="True"
                         ItemsSource="{x:Bind services:InterestsService.SaveSelectedListBoxItems}">
-            <Pivot.HeaderTemplate>
-                <DataTemplate x:DataType="models:NewsTopics">
-                    <TextBlock Text="{x:Bind Label}"/>
-                    
-                </DataTemplate>
-            </Pivot.HeaderTemplate>
 
-            --><!--<PivotItem>
+
+
+            <!--<Pivot.ItemTemplate>
+                <DataTemplate>
+                    <Rectangle Width="20" Height="20" Fill="Aqua"/>
+                </DataTemplate>
+            </Pivot.ItemTemplate>-->
+
+            <!--<PivotItem>
                 <PivotItem.Header>
                     <ListView ItemsSource="{x:Bind services:InterestsService.SaveSelectedListBoxItems}">
                         <ListView.ItemTemplate>
@@ -85,10 +87,10 @@
 
             <!--<PivotItem Header="Мои новости">
                 <Frame x:Name="GenerateNewsPage" />
-            </PivotItem>--><!--
+            </PivotItem>-->
            
 
-        </Pivot>-->
+        </Pivot>
 
 
 

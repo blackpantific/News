@@ -1,4 +1,5 @@
-﻿using News.Models;
+﻿using News.Helpers;
+using News.Models;
 using News.Services;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace News
     /// <summary>
     /// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
     /// </summary>
-    public sealed partial class TodayPage : Page, INotifyPropertyChanged
+    public sealed partial class TodayPage : Page //, INotifyPropertyChanged
     {
         //public ObservableCollection<string> ListOfUserPreferences { get; private set; }
 
@@ -33,6 +34,8 @@ namespace News
         //    new ObservableCollection<NewsTopics>(InterestsService.SaveSelectedListBoxItems);
         public TodayPage()
         {
+            
+
             this.InitializeComponent();
 
 
@@ -48,11 +51,11 @@ namespace News
           
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName]string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
+        //public event PropertyChangedEventHandler PropertyChanged;
+        //public void OnPropertyChanged([CallerMemberName]string prop = "")
+        //{
+        //    if (PropertyChanged != null)
+        //        PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        //}
     }
 }

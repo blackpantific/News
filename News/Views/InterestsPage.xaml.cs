@@ -39,7 +39,7 @@ namespace News
                 if (listOfCurrentNewsTopics != value)
                 {
                     listOfCurrentNewsTopics = value;
-                    OnPropertyChanged("ListOfCurrentNewsTopics");
+                    OnPropertyChanged("ListOfCurrentNewsTopics");//?
                 }
             }
         }
@@ -53,7 +53,7 @@ namespace News
             this.InitializeComponent();
 
             interestsName = ConstantHelper.InterestsName;
-            ConstantHelper.SetCheckedListsValues();
+            
           
         }
 
