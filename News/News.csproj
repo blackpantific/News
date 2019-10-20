@@ -123,6 +123,7 @@
     <Compile Include="Helpers\BindableBase.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\NewsTopics.cs" />
+    <Compile Include="Services\ApiReplyService.cs" />
     <Compile Include="Services\InterestsService.cs" />
     <Compile Include="Views\ContentPage.xaml.cs">
       <DependentUpon>ContentPage.xaml</DependentUpon>

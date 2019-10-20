@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace News
 {
-    class RootJson
+    public class RootJson
     {
         public string Status { get; set; }
         public int TotalResults { get; set; }

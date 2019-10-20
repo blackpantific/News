@@ -1,5 +1,9 @@
 ﻿using News.Helpers;
+using News.Models;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using Windows.UI.Xaml.Controls;
 
 // Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=234238
@@ -13,6 +17,21 @@ namespace News
     {
         List<string> newsName { get; set; }
         NewsApiService newsApiService;
+
+
+        private ObservableCollection<Article> newsList;
+        public ObservableCollection<Article> NewsList
+        {
+            get { return newsList; }
+            set
+            {
+                if (newsList != value)
+                {
+                    newsList = value;
+                    OnPropertyChanged("NewsList");
+                }
+            }
+        }
 
         public SourcesPage()
         {
@@ -28,9 +47,18 @@ namespace News
 
         }
 
-        private void SourcesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void SourcesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            newsApiService.GetNewsByTopic(SourcesList.SelectedItem.ToString());
+            NewsList = new ObservableCollection<Article>(await newsApiService
+                .GetNewsByTopic(SourcesList.SelectedItem.ToString()));
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName]string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+
     }
 }

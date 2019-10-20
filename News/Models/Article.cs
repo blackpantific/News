@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace News
 {
-    class Article
+    public class Article
     {
-        public Source Source;
+        public Source Source { get; set; }
         //The identifier id and a display name 
         //name for the source this article came from.
         public string Author { get; set; }
@@ -18,7 +18,5 @@ namespace News
         public string UrlToImage { get; set; }
         public string PublishedAt { get; set; }
         public string Content { get; set; }
-
-
     }
 }

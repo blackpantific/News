@@ -81,8 +81,7 @@
                  ItemsSource="{x:Bind interestsName}"
                  SelectedIndex="0"
                  SelectionChanged="InterestsList_SelectionChanged">
-            
-                 
+
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding}"/>
@@ -102,10 +101,5 @@
                   ItemTemplate="{StaticResource TopicGridView_ItemTemplate}">
 
         </GridView>
-
-
-      
-
-
     </Grid>
 </Page>

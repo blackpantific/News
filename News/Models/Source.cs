@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace News
 {
-    class Source
+    public class Source
     {
         public string Id { get; set; }
         public string Name { get; set; }

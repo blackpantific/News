@@ -56,9 +56,9 @@ namespace News
         /// например, если приложение запускается для открытия конкретного файла.
         /// </summary>
         /// <param name="e">Сведения о запросе и обработке запуска.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
-            ReadUserCheckedListElements();
+            await ReadUserCheckedListElements();
             
 
 
@@ -115,7 +115,7 @@ namespace News
         /// </summary>
         /// <param name="sender">Источник запроса приостановки.</param>
         /// <param name="e">Сведения о запросе приостановки.</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
+        private  void OnSuspending(object sender, SuspendingEventArgs e)
         {
             WriteUserCheckedListElements();//json user data to file
 
@@ -134,14 +134,17 @@ namespace News
             await FileIO.WriteTextAsync(storageUserCheckedListFile, json);
         }
 
-        async void ReadUserCheckedListElements()
+        async Task ReadUserCheckedListElements()
         {
             try
             {
                 var storageUserCheckedListFile = await localFolder.GetFileAsync("userDataCheckedList.txt");
                 var json = await FileIO.ReadTextAsync(storageUserCheckedListFile);
 
-                ConstantHelper.DeserializedJsonFromTxtFile = JsonConvert.DeserializeObject<List<NewsTopics>>(json);
+                ConstantHelper.DeserializedJsonFromTxtFile = JsonConvert.DeserializeObject<List<NewsTopics>>(json)
+                    .OrderByDescending(item => item.TopicId)
+                    .ToList();
+
                 ConstantHelper.SetCheckedListsValues();
             }
             catch(FileNotFoundException e)

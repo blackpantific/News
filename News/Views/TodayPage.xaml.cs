@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=234238
@@ -32,6 +33,8 @@ namespace News
 
         //public ObservableCollection<NewsTopics> RefToInterestsServiceList = 
         //    new ObservableCollection<NewsTopics>(InterestsService.SaveSelectedListBoxItems);
+        public Image Image { get; set; }
+        public string Path { get; set; }
         public TodayPage()
         {
             
@@ -47,8 +50,10 @@ namespace News
             //    ListOfUserPreferences.Add(item.Label);
             //}
 
+
+            //image.Source = new BitmapImage(
+            //    new Uri("https://m.files.bbci.co.uk/modules/bbc-morph-sport-page/3.3.2/images/bbc-sport-logo.png"));
             
-          
         }
 
         //public event PropertyChangedEventHandler PropertyChanged;

@@ -10,13 +10,53 @@
 
     <Page.Resources>
 
-       
+        <SolidColorBrush x:Key="LabelBackground"
+                             Color="#F2F2F2"/>
+
+        <ItemsPanelTemplate x:Key="NewsGridView_ItemsPanelTemplate">
+            <ItemsWrapGrid MaximumRowsOrColumns="4" Orientation="Horizontal"/>
+        </ItemsPanelTemplate>
+
+        <DataTemplate x:Key="GridView_ItemTemplate"
+                      x:DataType="local:Article">
+            
+            <GridViewItem Width="318" 
+                              Height="332"
+                              Margin="26 0 0 16">
+                <Grid Width="318" 
+                                  Height="332"
+                                  Background="{StaticResource LabelBackground}">
+                    <StackPanel Orientation="Vertical"
+                                            Height="290"
+                                            VerticalAlignment="Top">
+                        <Image Source="{x:Bind UrlToImage}"
+                                           Stretch="UniformToFill"
+                                           Height="180"
+                                           Width="318"/>
+                        <TextBlock Text="{x:Bind Title}"
+                                                FontSize="20"
+                                                FontWeight="Normal"
+                                                TextWrapping="WrapWholeWords"
+                                                Margin="10 10 0 0"
+                                                Width="290"
+                                                TextTrimming="CharacterEllipsis"/>
+                    </StackPanel>
+
+                    <TextBlock Text="{x:Bind Source.Name}"
+                                               FontWeight="Light"
+                                               Height="20"
+                                               Width="280"
+                                               VerticalAlignment="Bottom"
+                                               Margin="10"
+                                               />
+
+                </Grid>
+            </GridViewItem>
+        </DataTemplate>
         
         
     </Page.Resources>
     
-    
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"/>
@@ -38,9 +78,9 @@
                         FontSize="16"
                         FontFamily="Arial" />
             <TextBlock Text="Поиск источника для просмотра"
-                       Foreground="DarkSlateGray" 
+                        Foreground="DarkSlateGray" 
                         FontWeight="Light" 
-                       Margin="20 30 0 15"
+                        Margin="20 30 0 15"
                         Padding="20 10 0 0"
                         FontSize="20"
                         FontFamily="Arial"/>
@@ -64,16 +104,30 @@
                  Margin="10 0 0 0"
                  ItemsSource="{x:Bind newsName}"
                  SelectedIndex="0"
-                 SelectionChanged="SourcesList_SelectionChanged"
-                 >
+                 SelectionChanged="SourcesList_SelectionChanged">
             
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
+
                        
         </ListBox>
 
+        
+            <GridView x:Name="NewsTodayGridView"
+                        Width="1176"
+                        Height="600"
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        ItemsSource="{x:Bind NewsList}"
+                        ItemTemplate="{StaticResource GridView_ItemTemplate}"
+                        ItemsPanel="{StaticResource NewsGridView_ItemsPanelTemplate}">
+                          
+            </GridView>
+       
     </Grid>
 </Page>

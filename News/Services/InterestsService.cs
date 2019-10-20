@@ -10,7 +10,7 @@ namespace News.Services
 {
     public class InterestsService
     {
-        public static List<NewsTopics> SaveSelectedListBoxItems { get; private set; } = new List<NewsTopics>();
+        public static List<NewsTopics> SaveSelectedListBoxItems { get;  set; } = new List<NewsTopics>();
         
     }
 }

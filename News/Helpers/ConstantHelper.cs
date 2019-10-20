@@ -1,4 +1,5 @@
 ﻿using News.Models;
+using News.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -93,6 +94,8 @@ namespace News.Helpers
                     }
                 }
             }
+            InterestsService.SaveSelectedListBoxItems = InterestsService.SaveSelectedListBoxItems
+                .OrderBy(item => item.TopicId).ToList();
         }
     }
 }
