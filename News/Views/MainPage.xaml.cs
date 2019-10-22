@@ -25,6 +25,7 @@ namespace News
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private bool backButtonClicked { get; set; }
         public MainPage()
         {
             this.InitializeComponent();
@@ -41,6 +42,8 @@ namespace News
             //Is App connected to network
             //var profile = NetworkInformation.GetInternetConnectionProfile();
             //bool isConnected = profile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.None;
+
+            
         }
 
         private void nvTopLevelNav_Loaded(object sender, RoutedEventArgs e)
@@ -66,7 +69,7 @@ namespace News
             if (args.IsSettingsInvoked)
             {
                 contentFrame.Navigate(typeof(SettingsPage));
-            }
+            }           
             else
             {
                 var itemContent = args.InvokedItemContainer;
@@ -90,6 +93,24 @@ namespace News
             }
         }
 
+        private void NvTopLevelNav_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
+        {
+            On_BackRequested();
+        }
+
+        private bool On_BackRequested()
+        {
+            if (this.Frame.CanGoBack)
+            {
+                this.Frame.GoBack();
+                return true;
+            }
+            return false;
+        }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            
+        }
 
 
     }

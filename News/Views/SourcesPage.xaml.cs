@@ -13,13 +13,21 @@ namespace News
     /// <summary>
     /// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
     /// </summary>
-    public sealed partial class SourcesPage : Page
+    public sealed partial class SourcesPage : Page, INotifyPropertyChanged
     {
         List<string> newsName { get; set; }
         NewsApiService newsApiService;
 
 
         private ObservableCollection<Article> newsList;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName]string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+
         public ObservableCollection<Article> NewsList
         {
             get { return newsList; }
@@ -36,9 +44,7 @@ namespace News
         public SourcesPage()
         {
             this.InitializeComponent();
-
             newsName = ConstantHelper.NewsName;
-
             newsApiService = new NewsApiService();
 
 
@@ -53,12 +59,20 @@ namespace News
                 .GetNewsByTopic(SourcesList.SelectedItem.ToString()));
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName]string prop = "")
+        private void NewsTodayGridView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
+            var item = e.ClickedItem;
 
+            if (Frame.CanGoForward)
+            {
+                Frame.GoForward();
+            }
+            else
+            {
+                Frame.Navigate(typeof(ContentPage), (object)item);
+            }
+           
+                
+        }
     }
 }

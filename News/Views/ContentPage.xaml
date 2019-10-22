@@ -8,7 +8,37 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid Background="#F2F2F2">
+        <ScrollViewer>
+    <StackPanel Orientation="Vertical"
+                HorizontalAlignment="Center"
+                Background="White"
+                Margin="0 62 0 0"
+                Width="1368"
+                Height="Auto"
+                ScrollViewer.VerticalScrollMode="Enabled">
+        <TextBlock Text="{x:Bind Article.Title}"
+                   HorizontalAlignment="Center"
+                   Margin="0 30 0 30"
+                   FontSize="30"
+                   MaxLines="10"
+                   Height="Auto"
+                   FontWeight="Light"/>
+        <Image Source="{x:Bind Article.UrlToImage}"
+               Height="500"
+               Width="1000"
+               Stretch="Uniform"/>
+        <TextBlock Text="{x:Bind Article.Content}"
+                   Height="Auto"
+                   TextAlignment="Left"
+                   HorizontalAlignment="Center"
+                   Width="920"
+                   MaxLines="1000"
+                   TextWrapping="Wrap"
+                   FontSize="20"
+                   Margin="0 20 0 60"/>
 
+    </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

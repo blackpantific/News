@@ -17,42 +17,7 @@
             <ItemsWrapGrid MaximumRowsOrColumns="4" Orientation="Horizontal"/>
         </ItemsPanelTemplate>
 
-        <DataTemplate x:Key="GridView_ItemTemplate"
-                      x:DataType="local:Article">
-            
-            <GridViewItem Width="318" 
-                              Height="332"
-                              Margin="26 0 0 16">
-                <Grid Width="318" 
-                                  Height="332"
-                                  Background="{StaticResource LabelBackground}">
-                    <StackPanel Orientation="Vertical"
-                                            Height="290"
-                                            VerticalAlignment="Top">
-                        <Image Source="{x:Bind UrlToImage}"
-                                           Stretch="UniformToFill"
-                                           Height="180"
-                                           Width="318"/>
-                        <TextBlock Text="{x:Bind Title}"
-                                                FontSize="20"
-                                                FontWeight="Normal"
-                                                TextWrapping="WrapWholeWords"
-                                                Margin="10 10 0 0"
-                                                Width="290"
-                                                TextTrimming="CharacterEllipsis"/>
-                    </StackPanel>
-
-                    <TextBlock Text="{x:Bind Source.Name}"
-                                               FontWeight="Light"
-                                               Height="20"
-                                               Width="280"
-                                               VerticalAlignment="Bottom"
-                                               Margin="10"
-                                               />
-
-                </Grid>
-            </GridViewItem>
-        </DataTemplate>
+        
         
         
     </Page.Resources>
@@ -123,9 +88,51 @@
                         Grid.Row="1"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
-                        ItemsSource="{x:Bind NewsList}"
-                        ItemTemplate="{StaticResource GridView_ItemTemplate}"
-                        ItemsPanel="{StaticResource NewsGridView_ItemsPanelTemplate}">
+                        ItemsSource="{x:Bind NewsList, Mode=OneWay}"
+                        ItemsPanel="{StaticResource NewsGridView_ItemsPanelTemplate}"
+                        ItemClick="NewsTodayGridView_ItemClick"
+                        IsItemClickEnabled="True">
+            <!--ItemTemplate="{StaticResource GridView_ItemTemplate}"-->
+                
+            <GridView.ItemTemplate>
+                <DataTemplate 
+                      x:DataType="local:Article">
+
+                    <GridViewItem Width="318" 
+                              Height="332"
+                              Margin="26 0 0 16">
+                        <Grid Width="318" 
+                                  Height="332"
+                                  Background="{StaticResource LabelBackground}">
+                            <StackPanel Orientation="Vertical"
+                                            Height="290"
+                                            VerticalAlignment="Top">
+                                <Image Source="{x:Bind UrlToImage}"
+                                           Stretch="UniformToFill"
+                                           Height="180"
+                                           Width="318"/>
+                                <TextBlock Text="{x:Bind Title}"
+                                                FontSize="20"
+                                                FontWeight="Normal"
+                                                TextWrapping="WrapWholeWords"
+                                                MaxLines="3"
+                                                Margin="10 10 0 0"
+                                                Width="290"
+                                                TextTrimming="CharacterEllipsis"/>
+                            </StackPanel>
+
+                            <TextBlock Text="{x:Bind Source.Name}"
+                                               FontWeight="Light"
+                                               Height="20"
+                                               Width="280"
+                                               VerticalAlignment="Bottom"
+                                               Margin="10"
+                                               />
+
+                        </Grid>
+                    </GridViewItem>
+                </DataTemplate>
+            </GridView.ItemTemplate>
                           
             </GridView>
        

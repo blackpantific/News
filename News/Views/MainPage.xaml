@@ -22,7 +22,9 @@
         </Grid.ColumnDefinitions>
 
         <NavigationView x:Name="nvTopLevelNav"
-                        IsBackButtonVisible="Collapsed"
+                        IsBackButtonVisible="Visible"
+                        IsBackEnabled="True"
+                        BackRequested="NvTopLevelNav_BackRequested"
                         PaneDisplayMode="LeftCompact"
                         Loaded="nvTopLevelNav_Loaded"
                         SelectionChanged="nvTopLevelNav_SelectionChanged"

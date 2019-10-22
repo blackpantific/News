@@ -18,7 +18,7 @@ namespace News.Extensions
                     return "daily-mail";
                 case "CNN":
                     return "cnn";
-                case "Google News(Russia)":
+                case "Google News (Russia)":
                     return "google-news-ru";
                 case "Hacker News":
                     return "hacker-news";
