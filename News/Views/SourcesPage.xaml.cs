@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 // Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -52,6 +53,7 @@ namespace News
 
 
         }
+        
 
         private async void SourcesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -70,9 +72,12 @@ namespace News
             else
             {
                 Frame.Navigate(typeof(ContentPage), (object)item);
+                
             }
            
                 
         }
+
+      
     }
 }

@@ -27,19 +27,35 @@ namespace News
     /// <summary>
     /// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
     /// </summary>
-    public sealed partial class TodayPage : Page //, INotifyPropertyChanged
+    public sealed partial class TodayPage : Page, INotifyPropertyChanged
     {
         //public ObservableCollection<string> ListOfUserPreferences { get; private set; }
 
         //public ObservableCollection<NewsTopics> RefToInterestsServiceList = 
         //    new ObservableCollection<NewsTopics>(InterestsService.SaveSelectedListBoxItems);
-        public Image Image { get; set; }
-        public string Path { get; set; }
+        //public Image Image { get; set; }
+        //public string Path { get; set; }
+        NewsApiService newsApiService;
+
+        private ObservableCollection<Article> todayNewsList;
+        public ObservableCollection<Article> TodayNewsList
+        {
+            get { return todayNewsList; }
+            set
+            {
+                if (todayNewsList != value)
+                {
+                    todayNewsList = value;
+                    OnPropertyChanged("TodayNewsList");
+                }
+            }
+        }
         public TodayPage()
         {
             
 
             this.InitializeComponent();
+            newsApiService = new NewsApiService();
 
 
             //ВЫНЕСТИ В ОТДЕЛЬНЫЙ КЛАСС ДОБАВЛЕНИЯ ЭЛЕМЕНТОВ В PIVOT 
@@ -49,18 +65,36 @@ namespace News
             //{
             //    ListOfUserPreferences.Add(item.Label);
             //}
-
-
-            //image.Source = new BitmapImage(
-            //    new Uri("https://m.files.bbci.co.uk/modules/bbc-morph-sport-page/3.3.2/images/bbc-sport-logo.png"));
+            this.DataContext = this;
             
         }
 
-        //public event PropertyChangedEventHandler PropertyChanged;
-        //public void OnPropertyChanged([CallerMemberName]string prop = "")
-        //{
-        //    if (PropertyChanged != null)
-        //        PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        //}
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName]string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+
+        private async void NvTopLevelNav_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TodayNewsList = new ObservableCollection<Article>(await newsApiService
+                .GetNewsByWord(nvTopLevelNav.SelectedItem.ToString()));
+        }
+
+        private void GridView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var item = e.ClickedItem;
+
+            if (Frame.CanGoForward)
+            {
+                Frame.GoForward();
+            }
+            else
+            {
+                Frame.Navigate(typeof(ContentPage), (object)item);
+
+            }
+        }
     }
 }

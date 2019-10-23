@@ -39,6 +39,28 @@ namespace News
             }
         }
 
+        public async Task<List<Article>> GetNewsByWord(string newsTopic)
+        {
+            try
+            {
+                var client = new HttpClient();
+                client.BaseAddress = new Uri(String.Format(ConstantHelper.PathString,
+                    $"qInTitle={newsTopic.GetTopicId()}"));
+                var response = await client.GetAsync(client.BaseAddress);
+
+                response.EnsureSuccessStatusCode();
+
+                var json = await response.Content.ReadAsStringAsync();
+                var deserializedJson = JsonConvert.DeserializeObject<RootJson>(json);
+                return await Task.Run(() => (ApiReplyService.SaveNewsMainPageList = deserializedJson.articles));
+            }
+            catch (Exception ex)
+            {
+                var messageDialog = new MessageDialog(ex.Message);
+                await messageDialog.ShowAsync();
+                return null;
+            }
+        }
 
     }
 }

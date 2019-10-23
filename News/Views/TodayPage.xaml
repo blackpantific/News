@@ -15,28 +15,53 @@
                              Color="#F2F2F2"/>
      
         
-        <DataTemplate x:Key="NewsGridView_ItemTemplate">
-            <!--x:DataTypke=""-->
-                      
-            <Grid Width="332" 
-                  Height="318">
-                <Image Source="{}"/>
-                <TextBlock Text="{}"
-                           Margin="0 10 0 0"
-                           FontFamily="Arial"
-                           FontWeight="Normal"
-                           FontSize="19"
-                           Width="135"
-                           TextWrapping="WrapWholeWords"
-                           Foreground="White"/>
-                <CheckBox IsChecked="True"
-                          VerticalAlignment="Bottom"
-                          Margin="5 0 0 0"/>
-            </Grid>
+        
+        <DataTemplate x:Key="ItemsPivotDataTemplate"
+                      x:DataType="local:Article">
+            
+
+            <GridViewItem Width="318" 
+                              Height="332"
+                              Margin="26 0 0 16">
+                <Grid Width="318" 
+                                  Height="332"
+                                  Background="{StaticResource LabelBackground}">
+                    <StackPanel Orientation="Vertical"
+                                            Height="290"
+                                            VerticalAlignment="Top">
+                        <Image Source="{x:Bind UrlToImage}"
+                                           Stretch="UniformToFill"
+                                           Height="180"
+                                           Width="318"/>
+                        <TextBlock Text="{x:Bind Title}"
+                                                FontSize="20"
+                                                FontWeight="Normal"
+                                                TextWrapping="WrapWholeWords"
+                                                MaxLines="3"
+                                                Margin="10 10 0 0"
+                                                Width="290"
+                                                TextTrimming="CharacterEllipsis"/>
+                    </StackPanel>
+
+                    <TextBlock Text="{x:Bind Source.Name}"
+                                               FontWeight="Light"
+                                               Height="20"
+                                               Width="280"
+                                               VerticalAlignment="Bottom"
+                                               Margin="10"
+                                               />
+
+                </Grid>
+            </GridViewItem>
         </DataTemplate>
 
+       
 
-        
+        <ItemsPanelTemplate x:Key="TodayNewsGridView_ItemsPanelTemplate">
+                <ItemsWrapGrid MaximumRowsOrColumns="5" Orientation="Horizontal"/>
+            </ItemsPanelTemplate>
+     
+
 
     </Page.Resources>
     
@@ -44,7 +69,8 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="42"/>
-            <RowDefinition />
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -88,64 +114,36 @@
            
         </CommandBar>
 
-        <Pivot x:Name="nvTopLevelNav"
-                     
+        <Pivot x:Name="nvTopLevelNav"                    
                         Grid.Row="1"
                         Grid.Column="0"
                         Grid.ColumnSpan="3"
+                        SelectedIndex="0"
+                        SelectionChanged="NvTopLevelNav_SelectionChanged"
                         IsHeaderItemsCarouselEnabled="True"
-                        ItemsSource="{x:Bind services:InterestsService.SaveSelectedListBoxItems}">
-            <Pivot.ItemTemplate>
-                <DataTemplate>
-                    <GridView x:Name="NewsTodayGridView"
+                        VerticalAlignment="Top"
+                        ItemsSource="{x:Bind services:InterestsService.SaveSelectedListBoxItems}"
+                        Height="50">
+        </Pivot>
+
+        
+            <GridView 
                         Width="1456"
                         Height="680"
-                        Grid.Column="1"
-                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.Row="2"
+                        Grid.ColumnSpan="3"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
-                        Margin="0 16 0 0">
-                        <GridViewItem Width="318" 
-                              Height="332"
-                              Margin="26 0 0 16">
-                            <Grid Width="318" 
-                                  Height="332"
-                                  Background="{StaticResource LabelBackground}">
-                                <StackPanel Orientation="Vertical"
-                                            Height="290"
-                                            VerticalAlignment="Top">
-                                    <Image Source="/TopicNewsImages/breakingnews.jpg"
-                                           Stretch="UniformToFill"
-                                           Height="180"
-                                           Width="318"/>
-                                    <TextBlock Text="One of Google Maps' Best New Features Is Finally Available on iOS"
-                                                FontSize="20"
-                                                FontWeight="Normal"
-                                                TextWrapping="WrapWholeWords"
-                                                Margin="10 10 0 0"
-                                                Width="290"
-                                                TextTrimming="CharacterEllipsis"/>
-                                </StackPanel>
-                                
-                                    <TextBlock Text="Lenta.ru"
-                                               FontWeight="Light"
-                                               Height="20"
-                                               Width="280"
-                                               VerticalAlignment="Bottom"
-                                               Margin="10"
-                                               />
-                                
-                            </Grid>
-                        </GridViewItem>
-                        
-                        <GridView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <ItemsWrapGrid MaximumRowsOrColumns="4" Orientation="Horizontal"/>
-                            </ItemsPanelTemplate>
-                        </GridView.ItemsPanel>
-                    </GridView>
-                </DataTemplate>
-            </Pivot.ItemTemplate>
+                        Margin="0 16 0 0"
+                        ItemClick="GridView_ItemClick"
+                        IsItemClickEnabled="True"
+                        ItemsPanel="{StaticResource TodayNewsGridView_ItemsPanelTemplate}"
+                        ItemsSource="{x:Bind TodayNewsList, Mode=OneWay}"
+                        ItemTemplate="{StaticResource ItemsPivotDataTemplate}">
+
+            </GridView>
+
 
             <!--<PivotItem>
                 <PivotItem.Header>
@@ -164,9 +162,9 @@
             </PivotItem>-->
            
 
-        </Pivot>
+      
 
-        <Image x:Name="image" />
+  
 
     </Grid>
 </Page>

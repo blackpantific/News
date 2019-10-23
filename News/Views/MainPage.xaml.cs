@@ -15,6 +15,9 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Networking.Connectivity;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using News.Helpers;
 
 // Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x419
 
@@ -23,9 +26,21 @@ namespace News
     /// <summary>
     /// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage : Page, INotifyPropertyChanged
     {
-        private bool backButtonClicked { get; set; }
+        private bool _backButtonClicked;
+        public bool BackButtonClicked
+        {
+            get { return _backButtonClicked; }
+            set
+            {
+                if(_backButtonClicked != value)
+                {
+                    _backButtonClicked = value;
+                    OnPropertyChanged("BackButtonClicked");
+                }
+            }
+        }
         public MainPage()
         {
             this.InitializeComponent();
@@ -43,7 +58,14 @@ namespace News
             //var profile = NetworkInformation.GetInternetConnectionProfile();
             //bool isConnected = profile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.None;
 
-            
+            BackButtonClicked = ConstantHelper.IsBackButtonClicked;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName]string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
         private void nvTopLevelNav_Loaded(object sender, RoutedEventArgs e)
@@ -95,23 +117,9 @@ namespace News
 
         private void NvTopLevelNav_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         {
-            On_BackRequested();
+            contentFrame.Navigate(typeof(SourcesPage));
         }
 
-        private bool On_BackRequested()
-        {
-            if (this.Frame.CanGoBack)
-            {
-                this.Frame.GoBack();
-                return true;
-            }
-            return false;
-        }
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            
-        }
-
-
+        
     }
 }

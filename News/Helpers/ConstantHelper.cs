@@ -3,7 +3,9 @@ using News.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,6 +14,7 @@ namespace News.Helpers
   
     class ConstantHelper
     {
+        public static bool IsBackButtonClicked { get; set; } = false;
 
         public static readonly List<string> NewsName = new List<string>()
             {"BBC News", "Daily Mail", "CNN", "Google News (Russia)",

@@ -9,7 +9,23 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Background="#F2F2F2">
-        <ScrollViewer>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        
+        <CommandBar Grid.Row="0">
+            <CommandBar.Content>
+                <Button Style="{StaticResource NavigationBackButtonNormalStyle}" 
+                        x:Name="BackButton"
+                        VerticalAlignment="Top"
+                        Click="BackButton_Click"/>
+            </CommandBar.Content>
+        </CommandBar>
+        
+        <ScrollViewer Grid.Row="1">
     <StackPanel Orientation="Vertical"
                 HorizontalAlignment="Center"
                 Background="White"

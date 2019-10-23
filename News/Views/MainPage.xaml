@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Windows.UI.Xaml.Controls"
     xmlns:Windows10version1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
+    xmlns:helpers ="using:News.Helpers"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -22,13 +23,14 @@
         </Grid.ColumnDefinitions>
 
         <NavigationView x:Name="nvTopLevelNav"
-                        IsBackButtonVisible="Visible"
-                        IsBackEnabled="True"
-                        BackRequested="NvTopLevelNav_BackRequested"
+                        IsBackButtonVisible="Collapsed"
                         PaneDisplayMode="LeftCompact"
                         Loaded="nvTopLevelNav_Loaded"
                         SelectionChanged="nvTopLevelNav_SelectionChanged"
                         ItemInvoked="nvTopLevelNav_ItemInvoked">
+            <!--
+                        IsBackEnabled="{x:Bind BackButtonClicked}"
+                        BackRequested="NvTopLevelNav_BackRequested"-->
             <NavigationView.MenuItems>
                 <NavigationViewItem 
                     Icon="Home" 

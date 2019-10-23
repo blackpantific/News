@@ -1,4 +1,5 @@
-﻿using System;
+﻿using News.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -47,7 +48,6 @@ namespace News
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
@@ -55,7 +55,23 @@ namespace News
             {
                 Article = article;
             }
+            ConstantHelper.IsBackButtonClicked = true;
+
+            BackButton.IsEnabled = this.Frame.CanGoBack;
         }
 
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            On_BackRequested();
+        }
+        private bool On_BackRequested()
+        {
+            if (this.Frame.CanGoBack)
+            {
+                this.Frame.GoBack();
+                return true;
+            }
+            return false;
+        }
     }
 }

@@ -30,6 +30,27 @@ namespace News.Extensions
                     return "the-wall-street-journal";
                 case "BBC Sport":
                     return "bbc-sport";
+
+                case "Главные новости":
+                    return "top";
+                case "В мире":
+                    return "world";
+                case "Культура":
+                    return "culture";
+                case "Происшествия":
+                    return "incidents";
+                case "Футбол":
+                    return "football";
+                case "Баскетбол":
+                    return "basketball";
+                case "Хоккей":
+                    return "hockey";
+                case "Знаменитости":
+                    return "celebrities";
+                case "Кино и ТВ":
+                    return "cinema";
+                case "Музыка":
+                    return "music";
                 default: return null;
             }
         }
