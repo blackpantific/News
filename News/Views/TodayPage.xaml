@@ -128,8 +128,6 @@
 
         
             <GridView 
-                        Width="1456"
-                        Height="680"
                         Grid.Column="0"
                         Grid.Row="2"
                         Grid.ColumnSpan="3"
@@ -143,28 +141,6 @@
                         ItemTemplate="{StaticResource ItemsPivotDataTemplate}">
 
             </GridView>
-
-
-            <!--<PivotItem>
-                <PivotItem.Header>
-                    <ListView ItemsSource="{x:Bind services:InterestsService.SaveSelectedListBoxItems}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="models:NewsTopics">
-                                <TextBlock Text="{x:Bind Label}"/>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </PivotItem.Header>
-            </PivotItem>-->
-
-            <!--<PivotItem Header="Мои новости">
-                <Frame x:Name="GenerateNewsPage" />
-            </PivotItem>-->
-           
-
-      
-
-  
 
     </Grid>
 </Page>

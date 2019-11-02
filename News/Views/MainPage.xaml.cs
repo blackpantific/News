@@ -54,10 +54,6 @@ namespace News
             titleBar.BackgroundColor = Windows.UI.ColorHelper.FromArgb(1, 67, 234, 165);
             titleBar.ButtonBackgroundColor = ColorHelper.FromArgb(1, 67, 234, 165);
 
-            //Is App connected to network
-            //var profile = NetworkInformation.GetInternetConnectionProfile();
-            //bool isConnected = profile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.None;
-
             BackButtonClicked = ConstantHelper.IsBackButtonClicked;
         }
 

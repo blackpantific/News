@@ -29,12 +29,6 @@ namespace News
     /// </summary>
     public sealed partial class TodayPage : Page, INotifyPropertyChanged
     {
-        //public ObservableCollection<string> ListOfUserPreferences { get; private set; }
-
-        //public ObservableCollection<NewsTopics> RefToInterestsServiceList = 
-        //    new ObservableCollection<NewsTopics>(InterestsService.SaveSelectedListBoxItems);
-        //public Image Image { get; set; }
-        //public string Path { get; set; }
         NewsApiService newsApiService;
 
         private ObservableCollection<Article> todayNewsList;
@@ -56,15 +50,6 @@ namespace News
 
             this.InitializeComponent();
             newsApiService = new NewsApiService();
-
-
-            //ВЫНЕСТИ В ОТДЕЛЬНЫЙ КЛАСС ДОБАВЛЕНИЯ ЭЛЕМЕНТОВ В PIVOT 
-            //GenerateNewsPage.Navigate(typeof(NewsCollectionPage));
-
-            //foreach (var item in InterestsService.SaveSelectedListBoxItems)
-            //{
-            //    ListOfUserPreferences.Add(item.Label);
-            //}
             this.DataContext = this;
             
         }

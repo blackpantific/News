@@ -58,7 +58,7 @@ namespace News
         /// <param name="e">Сведения о запросе и обработке запуска.</param>
         protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
-            await ReadUserCheckedListElements();
+            await ReadUserCheckedListElementsAsync();
             
 
 
@@ -117,7 +117,8 @@ namespace News
         /// <param name="e">Сведения о запросе приостановки.</param>
         private  void OnSuspending(object sender, SuspendingEventArgs e)
         {
-            WriteUserCheckedListElements();//json user data to file
+            WriteUserCheckedListElementsAsync();//json user data to file
+            //await
 
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Сохранить состояние приложения и остановить все фоновые операции
@@ -125,7 +126,7 @@ namespace News
         }
 
 
-        async void WriteUserCheckedListElements()
+        public async void WriteUserCheckedListElementsAsync()
         {
             var json = JsonConvert.SerializeObject(InterestsService.SaveSelectedListBoxItems);
 
@@ -134,7 +135,7 @@ namespace News
             await FileIO.WriteTextAsync(storageUserCheckedListFile, json);
         }
 
-        async Task ReadUserCheckedListElements()
+        public async Task ReadUserCheckedListElementsAsync()
         {
             try
             {

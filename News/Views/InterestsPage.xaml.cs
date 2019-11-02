@@ -43,7 +43,7 @@ namespace News
                 }
             }
         }
-        List<string> interestsName { get; set; }
+        public List<string> interestsName { get; set; }
        
         
 
@@ -60,13 +60,12 @@ namespace News
         private void InterestsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var newsTopic = InterestsList.SelectedItem;
-            //if(приложение было запущно ранее)
-            //считать информацию из списка
+
             switch (newsTopic)
             {
                 case "Новости":
                     ListOfCurrentNewsTopics = ConstantHelper.news;
-                    //CheckingListForSelectedValues(ListOfCurrentNewsTopics, InterestsService.SaveSelectedListBoxItems);
+                   
                     break;
                 case "Спорт":
                     ListOfCurrentNewsTopics = ConstantHelper.sport;

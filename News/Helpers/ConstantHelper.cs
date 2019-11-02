@@ -25,14 +25,10 @@ namespace News.Helpers
         { "Новости", "Спорт", "Развлечения", "Повседневная жизнь", "Семья и саморазвитие",
             "Бизнес и финансы", "Авто", "Технологии", "Фото и видео", "Страны ЕС" };
 
-        public static string PathString = "https://newsapi.org/v2/everything?{0}&apiKey=562af3f4f64141dfbe20f2d60844a6b0";
+        public static readonly string PathString = "https://newsapi.org/v2/everything?{0}&apiKey=562af3f4f64141dfbe20f2d60844a6b0";
 
         public static List<NewsTopics> DeserializedJsonFromTxtFile { get; set; } = new List<NewsTopics>();
 
-
-        //создание тем для каждого подраздела новостей, страница InterestsPage
-
-        //ВНЕСТИ ВСЕ ОБЪЯВЛЕНИЕ В ЦИКЛ И В НЕМ ЗАДАВАТЬ TRUE СВОЙСТВУ IsChecked из списка данных приложения, 
         public static readonly ObservableCollection<NewsTopics> news = new ObservableCollection<NewsTopics>()
         {
             new NewsTopics() { Label = "Главные новости", PicturePath="/TopicNewsImages/breakingnews.jpg", TopicId=0},
@@ -84,7 +80,7 @@ namespace News.Helpers
             var listOfLists = from list in lists
                               from topicList in list
                               select topicList;
-            if (ConstantHelper.DeserializedJsonFromTxtFile != null)        //ТУТ МОЖЕТ БЫТЬ ПРОБЛЕМА
+            if (ConstantHelper.DeserializedJsonFromTxtFile != null) 
             {
                 foreach (var deserializedItem in ConstantHelper.DeserializedJsonFromTxtFile)
                 {

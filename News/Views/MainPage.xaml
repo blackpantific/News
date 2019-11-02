@@ -52,26 +52,5 @@
             </NavigationView.MenuItems>
             <Frame x:Name="contentFrame"></Frame>
         </NavigationView>
-
-
-
-            <!--<RelativePanel x:Name="HeaderPanel" 
-                       Background="Red" 
-                       Height="50" 
-                       Grid.Row="0">
-
-
-        </RelativePanel>
-
-        <CommandBar>
-            <AppBarToggleButton x:Name="NightTheme"
-                                Label="Night"
-                                Click="NightTheme_Click"
-                                Icon="Add">
-
-            </AppBarToggleButton>
-        </CommandBar>-->
-
-
     </Grid>
 </Page>
