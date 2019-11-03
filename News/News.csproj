@@ -130,7 +130,6 @@
     </Compile>
     <Compile Include="Models\RootJson.cs" />
     <Compile Include="Helpers\ConstantHelper.cs" />
-    <Compile Include="ImageFileInfo.cs" />
     <Compile Include="Views\InterestsPage.xaml.cs">
       <DependentUpon>InterestsPage.xaml</DependentUpon>
     </Compile>
