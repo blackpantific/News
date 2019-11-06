@@ -1,0 +1,60 @@
+﻿<Page
+    x:Class="News.ContentPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:News"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="#F2F2F2">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        
+        <CommandBar Grid.Row="0">
+            <CommandBar.Content>
+                <Button Style="{StaticResource NavigationBackButtonNormalStyle}" 
+                        x:Name="BackButton"
+                        VerticalAlignment="Top"
+                        Click="BackButton_Click"/>
+            </CommandBar.Content>
+        </CommandBar>
+        
+        <ScrollViewer Grid.Row="1">
+    <StackPanel Orientation="Vertical"
+                HorizontalAlignment="Center"
+                Background="White"
+                Margin="0 62 0 0"
+                Width="1368"
+                Height="Auto"
+                ScrollViewer.VerticalScrollMode="Enabled">
+        <TextBlock Text="{x:Bind Article.Title}"
+                   HorizontalAlignment="Center"
+                   Margin="0 30 0 30"
+                   FontSize="30"
+                   MaxLines="10"
+                   Height="Auto"
+                   FontWeight="Light"/>
+        <Image Source="{x:Bind Article.UrlToImage}"
+               Height="500"
+               Width="1000"
+               Stretch="Uniform"/>
+        <TextBlock Text="{x:Bind Article.Content}"
+                   Height="Auto"
+                   TextAlignment="Left"
+                   HorizontalAlignment="Center"
+                   Width="920"
+                   MaxLines="1000"
+                   TextWrapping="Wrap"
+                   FontSize="20"
+                   Margin="0 20 0 60"/>
+
+    </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

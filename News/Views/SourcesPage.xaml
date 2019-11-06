@@ -1,0 +1,136 @@
+﻿<Page
+    x:Class="News.SourcesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:News"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+
+        <SolidColorBrush x:Key="LabelBackground"
+                             Color="#F2F2F2"/>
+
+        <ItemsPanelTemplate x:Key="NewsGridView_ItemsPanelTemplate">
+            <ItemsWrapGrid MaximumRowsOrColumns="4" Orientation="Horizontal"/>
+        </ItemsPanelTemplate>
+
+        
+    </Page.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="165"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical" 
+                    Grid.Row="0"
+                    Grid.Column="0" 
+                    Grid.ColumnSpan="2">
+            <TextBlock Text="Новостные источники"
+                        Foreground="DarkSlateGray" 
+                        FontWeight="Bold" 
+                        Padding="20 10 0 0"
+                        FontSize="16"
+                        FontFamily="Arial" />
+            <TextBlock Text="Поиск источника для просмотра"
+                        Foreground="DarkSlateGray" 
+                        FontWeight="Light" 
+                        Margin="20 30 0 15"
+                        Padding="20 10 0 0"
+                        FontSize="20"
+                        FontFamily="Arial"/>
+            <AutoSuggestBox
+                   Margin="45 0 0 10"
+                   PlaceholderText="Поиск"
+                   QueryIcon="Find"
+                   Width="600"
+                    HorizontalAlignment="Left"
+                   AutomationProperties.Name="Basic AutoSuggestBox">
+
+            </AutoSuggestBox>
+            <MenuFlyoutSeparator/>
+        </StackPanel>
+
+
+        <ListBox x:Name="SourcesList" 
+                 Grid.Row="1"
+                 Grid.Column="0"
+                 Background="White"
+                 Margin="10 0 0 0"
+                 ItemsSource="{x:Bind newsName}"
+                 SelectedIndex="0"
+                 SelectionChanged="SourcesList_SelectionChanged">
+            
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+                       
+        </ListBox>
+
+        
+            <GridView x:Name="NewsTodayGridView"
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        ItemsSource="{x:Bind NewsList, Mode=OneWay}"
+                        ItemsPanel="{StaticResource NewsGridView_ItemsPanelTemplate}"
+                        ItemClick="NewsTodayGridView_ItemClick"
+                        IsItemClickEnabled="True">
+            <!--ItemTemplate="{StaticResource GridView_ItemTemplate}"-->
+                
+            <GridView.ItemTemplate>
+                <DataTemplate 
+                      x:DataType="local:Article">
+
+                    <GridViewItem Width="318" 
+                              Height="332"
+                              Margin="26 0 0 16">
+                        <Grid Width="318" 
+                                  Height="332"
+                                  Background="{StaticResource LabelBackground}">
+                            <StackPanel Orientation="Vertical"
+                                            Height="290"
+                                            VerticalAlignment="Top">
+                                <Image Source="{x:Bind UrlToImage}"
+                                           Stretch="UniformToFill"
+                                           Height="180"
+                                           Width="318"/>
+                                <TextBlock Text="{x:Bind Title}"
+                                                FontSize="20"
+                                                FontWeight="Normal"
+                                                TextWrapping="WrapWholeWords"
+                                                MaxLines="3"
+                                                Margin="10 10 0 0"
+                                                Width="290"
+                                                TextTrimming="CharacterEllipsis"/>
+                            </StackPanel>
+
+                            <TextBlock Text="{x:Bind Source.Name}"
+                                               FontWeight="Light"
+                                               Height="20"
+                                               Width="280"
+                                               VerticalAlignment="Bottom"
+                                               Margin="10"
+                                               />
+
+                        </Grid>
+                    </GridViewItem>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+                          
+            </GridView>
+       
+    </Grid>
+</Page>

@@ -1,14 +1,21 @@
-﻿using System;
+﻿using News.Helpers;
+using News.Models;
+using News.Services;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI;
+using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -29,16 +36,18 @@ namespace News
         /// Инициализирует одноэлементный объект приложения. Это первая выполняемая строка разрабатываемого
         /// кода, поэтому она является логическим эквивалентом main() или WinMain().
         /// </summary>
+        /// 
+
+        public Windows.Storage.StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+
         public App()
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 
             //полноэкранный режим
-            
 
-            //SolidColorBrush solidColorBrush = new SolidColorBrush();
-            //solidColorBrush.Color
+           
 
         }
 
@@ -47,8 +56,12 @@ namespace News
         /// например, если приложение запускается для открытия конкретного файла.
         /// </summary>
         /// <param name="e">Сведения о запросе и обработке запуска.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
+            await ReadUserCheckedListElementsAsync();
+            
+
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Не повторяйте инициализацию приложения, если в окне уже имеется содержимое,
@@ -81,6 +94,8 @@ namespace News
                 // Обеспечение активности текущего окна
                 Window.Current.Activate();
             }
+
+
         }
 
         /// <summary>
@@ -100,11 +115,55 @@ namespace News
         /// </summary>
         /// <param name="sender">Источник запроса приостановки.</param>
         /// <param name="e">Сведения о запросе приостановки.</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
+        private  void OnSuspending(object sender, SuspendingEventArgs e)
         {
+            WriteUserCheckedListElementsAsync();//json user data to file
+            //await
+
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Сохранить состояние приложения и остановить все фоновые операции
             deferral.Complete();
         }
+
+
+        public async void WriteUserCheckedListElementsAsync()
+        {
+            var json = JsonConvert.SerializeObject(InterestsService.SaveSelectedListBoxItems);
+
+            var storageUserCheckedListFile = await localFolder.CreateFileAsync("userDataCheckedList.txt", 
+                CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(storageUserCheckedListFile, json);
+        }
+
+        public async Task ReadUserCheckedListElementsAsync()
+        {
+            try
+            {
+                var storageUserCheckedListFile = await localFolder.GetFileAsync("userDataCheckedList.txt");
+                var json = await FileIO.ReadTextAsync(storageUserCheckedListFile);
+
+                ConstantHelper.DeserializedJsonFromTxtFile = JsonConvert.DeserializeObject<List<NewsTopics>>(json)
+                    .OrderByDescending(item => item.TopicId)
+                    .ToList();
+
+                ConstantHelper.SetCheckedListsValues();
+            }
+            catch(FileNotFoundException e)
+            {
+                var messageDialog = new MessageDialog(e.Message);
+                await messageDialog.ShowAsync();
+            }
+            catch(IOException e)
+            {
+                var messageDialog = new MessageDialog(e.Message);
+                await messageDialog.ShowAsync();
+            }
+            catch(Exception e)
+            {
+                var messageDialog = new MessageDialog(e.Message);
+                await messageDialog.ShowAsync();
+            }
+        }
+
     }
 }

@@ -1,0 +1,103 @@
+﻿<Page
+    x:Class="News.InterestsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:News"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:News.Models"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+
+        <DataTemplate x:Key="TopicGridView_ItemTemplate"
+                      x:DataType="models:NewsTopics">
+            <Grid Width="192" 
+                  Height="228">
+                <Image Source="{x:Bind PicturePath}"/>
+                <TextBlock Text="{x:Bind Label}"
+                           Margin="0 10 0 0"
+                           FontFamily="Arial"
+                           FontWeight="Normal"
+                           FontSize="20"
+                           Width="136"
+                           TextWrapping="WrapWholeWords"
+                           Foreground="White"/>
+                <CheckBox IsChecked="{x:Bind IsChecked, Mode=TwoWay}"
+                          VerticalAlignment="Bottom"
+                          Margin="5 0 0 0"/>
+            </Grid>
+        </DataTemplate>
+
+    </Page.Resources>
+    
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="165"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical" 
+                    Grid.Row="0"
+                    Grid.Column="0" 
+                    Grid.ColumnSpan="2">
+            <TextBlock Text="Мои интересы"
+                        Foreground="DarkSlateGray" 
+                        FontWeight="Bold" 
+                        Padding="20 10 0 0"
+                        FontSize="16"
+                        FontFamily="Arial" />
+            <TextBlock Text="Поиск интереса для просмотра"
+                       Foreground="DarkSlateGray" 
+                        FontWeight="Light" 
+                       Margin="20 30 0 15"
+                        Padding="20 10 0 0"
+                        FontSize="20"
+                        FontFamily="Arial"/>
+            <AutoSuggestBox
+                   Margin="45 0 0 10"
+                   PlaceholderText="Поиск среди интересов и в интернете"
+                   QueryIcon="Find"
+                   Width="600"
+                    HorizontalAlignment="Left"
+                   AutomationProperties.Name="Basic AutoSuggestBox">
+
+            </AutoSuggestBox>
+            <MenuFlyoutSeparator/>
+        </StackPanel>
+
+
+        <ListBox x:Name="InterestsList" 
+                 Grid.Row="1"
+                 Grid.Column="0"
+                 Background="White"
+                 Margin="10 0 0 0"
+                 ItemsSource="{x:Bind interestsName}"
+                 SelectedIndex="0"
+                 SelectionChanged="InterestsList_SelectionChanged">
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <GridView x:Name="NewsSourcesGridView"
+                  Grid.Column="1"
+                  Grid.Row="1"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  Margin="28 16 0 0"
+                  ItemsSource="{x:Bind ListOfCurrentNewsTopics, Mode=TwoWay}"
+                  ItemTemplate="{StaticResource TopicGridView_ItemTemplate}">
+
+        </GridView>
+    </Grid>
+</Page>
